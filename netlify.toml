@@ -1,0 +1,53 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+
+# Chặn truy cập trực tiếp vào các file
+[[redirects]]
+  from = "/*.js"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.css"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.html"
+  to = "/index.html"
+  status = 200
+  force = true
+
+# Chặn truy cập vào thư mục
+[[redirects]]
+  from = "/css/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/js/*"
+  to = "/index.html"
+  status = 200
+  force = true 
