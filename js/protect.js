@@ -42,41 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Detect DevTools - Improved version
-let devtools = {
-    isOpen: false,
-    orientation: undefined
-};
-
-const threshold = 160;
-
-const emitEvent = (isOpen, orientation) => {
-    if (isOpen !== devtools.isOpen || orientation !== devtools.orientation) {
-        devtools.isOpen = isOpen;
-        devtools.orientation = orientation;
-        if (isOpen) {
-            document.body.style.display = 'none';
-        } else {
-            document.body.style.display = 'block';
-        }
-    }
-};
-
-const checkDevTools = () => {
-    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-    const orientation = widthThreshold ? 'vertical' : 'horizontal';
-
-    if (widthThreshold || heightThreshold) {
-        emitEvent(true, orientation);
-    } else {
-        emitEvent(false, undefined);
-    }
-};
-
-// Check for DevTools every 500ms instead of 100ms
-setInterval(checkDevTools, 500);
-
 // Disable view source
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'u') {
